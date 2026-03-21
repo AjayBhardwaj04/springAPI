@@ -1,9 +1,9 @@
-package com.example.api.servise;
+package com.example.api.service;
 
 import com.example.api.dto.studentDto;
 
 import java.util.List;
 
-public interface studentServise {
+public interface studentService {
     List<studentDto> getStudents();
 }
