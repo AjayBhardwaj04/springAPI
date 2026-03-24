@@ -1,28 +1,29 @@
 package com.example.api.controller;
 
 import com.example.api.dto.studentDto;
-import com.example.api.entity.Students;
-import com.example.api.repository.studentRepository;
+import com.example.api.service.studentService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Collections;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 public class studentController {
 
-   private final studentRepository studentRepository;
+   private final studentService studentService;
 
-    public studentController(studentRepository studentRepository) {
 
-        this.studentRepository = studentRepository;
+
+    @GetMapping("/students")
+    public List<studentDto> getStudent() {
+        return studentService.getAllStudents();
+
     }
-
-    @GetMapping("/student")
-    public List<Students> getStudent() {
-        return studentRepository.findAll();
-
+    @GetMapping("/students/{ID}")
+    public studentDto getAllStudentsById( @PathVariable long ID) {
+        return studentService.getById(ID);
     }
 }
-
