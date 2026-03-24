@@ -7,9 +7,9 @@ import com.example.api.service.studentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+
 import java.util.List;
-import java.util.stream.Stream;
+
 
 @Service
 @RequiredArgsConstructor
@@ -18,9 +18,24 @@ public class studentServiceImpl  implements studentService {
     private final studentRepository repository;
 
     @Override
-    public List<studentDto> getStudents() {
+    public List<studentDto> getAllStudents() {
         List<Students> students = repository.findAll();
-        Stream<studentDto> studentDtoList = students.stream().map(student -> new studentDto(student.getId(),student.getName(),student.getEmail()));
-        return List.of();
+        return students.stream()
+                .map(student ->
+                        new studentDto(student.getId(),student.getName(),student.getEmail())).toList();
+
     }
+
+
+    @Override
+    public studentDto getById(long id) {
+        return studentRepository.
+    }
+
+
+//    @Override
+//    public  studentDto getById(long id) {
+//        Students students= studentService.getById(id).orElseThrow(() -> new IllegalArgumentException("Student id not found " + id));
+//        return new studentDto(students.getId(),students.getName(),students.getEmail());
+//    }
 }
