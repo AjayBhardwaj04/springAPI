@@ -1,5 +1,6 @@
 ### GET request to example server
-GET localhost:8080/students/ raju/ 120
+GET localhost:8080/students/12
+
 
 ###
-GET localhost:8080/student
+GET localhost:8080/students
