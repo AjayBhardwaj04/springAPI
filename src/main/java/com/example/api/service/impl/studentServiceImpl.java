@@ -5,6 +5,7 @@ import com.example.api.entity.Students;
 import com.example.api.repository.studentRepository;
 import com.example.api.service.studentService;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 
@@ -15,27 +16,25 @@ import java.util.List;
 @RequiredArgsConstructor
 public class studentServiceImpl  implements studentService {
 
-    private final studentRepository repository;
+    private final studentRepository studentRepository;
+    private final ModelMapper modelMapper;
 
     @Override
     public List<studentDto> getAllStudents() {
-        List<Students> students = repository.findAll();
-        return students.stream()
-                .map(student ->
-                        new studentDto(student.getId(),student.getName(),student.getEmail())).toList();
+        List<Students> students = studentRepository.findAll();
+        return students.stream().map(student -> modelMapper.map(students,studentDto.class)).toList();
+//
+//        return students.stream() //
+//                .map(student ->
+//                        new studentDto(student.getId(),student.getName(),student.getEmail())).toList();
 
     }
+
 
 
     @Override
-    public studentDto getById(long id) {
-        return studentRepository.
+    public  studentDto getById(long id) {
+        Students students= studentRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Student id not found " + id));
+       return modelMapper.map(students,studentDto.class);
     }
-
-
-//    @Override
-//    public  studentDto getById(long id) {
-//        Students students= studentService.getById(id).orElseThrow(() -> new IllegalArgumentException("Student id not found " + id));
-//        return new studentDto(students.getId(),students.getName(),students.getEmail());
-//    }
 }
