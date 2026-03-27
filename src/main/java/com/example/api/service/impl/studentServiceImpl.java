@@ -22,7 +22,7 @@ public class studentServiceImpl  implements studentService {
     @Override
     public List<studentDto> getAllStudents() {
         List<Students> students = studentRepository.findAll();
-        return students.stream().map(student -> modelMapper.map(students,studentDto.class)).toList();
+        return  students.stream().map(student -> modelMapper.map(students,studentDto.class)).toList();
 //
 //        return students.stream() //
 //                .map(student ->
