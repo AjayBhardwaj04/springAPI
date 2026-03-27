@@ -1,6 +1,12 @@
+GET http://localhost:8080/students
+Accept: application/json
+
+###
 ### GET request to example server
-GET localhost:8080/students/12
+GET localhost:8080/students/21
 
 
 ###
 GET localhost:8080/students
+
+
