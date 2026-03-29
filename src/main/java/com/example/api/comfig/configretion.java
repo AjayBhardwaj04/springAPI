@@ -11,13 +11,8 @@ public class configretion {
     @Bean
     public ModelMapper modelMapper() {
         ModelMapper mapper = new ModelMapper();
-        mapper.getConfiguration()
-                // avoid loose weird matches
-                .setMatchingStrategy(MatchingStrategies.STRICT)
-                // do not overwrite destination fields with nulls
-                .setSkipNullEnabled(true)
-                .setPropertyCondition(Conditions.isNotNull());
-        return mapper;
+//       mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+       return mapper;
     }
 
 }
