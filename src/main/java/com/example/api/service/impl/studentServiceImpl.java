@@ -1,5 +1,6 @@
 package com.example.api.service.impl;
 
+import com.example.api.dto.addStudentReqDTO;
 import com.example.api.dto.studentDto;
 import com.example.api.entity.Students;
 import com.example.api.repository.studentRepository;
@@ -20,6 +21,11 @@ public class studentServiceImpl  implements studentService {
     private final ModelMapper modelMapper;
 
     @Override
+    public List<studentDto> getAllStudents(String name) {
+        return List.of();
+    }
+
+    @Override
     public List<studentDto> getAllStudents() {
         List<Students> students = studentRepository.findAll();
         return  students.stream().map(student -> modelMapper.map(students,studentDto.class)).toList();
@@ -36,5 +42,12 @@ public class studentServiceImpl  implements studentService {
     public  studentDto getById(long id) {
         Students students= studentRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Student id not found " + id));
        return modelMapper.map(students,studentDto.class);
+    }
+
+    @Override
+    public studentDto addNewStudent(addStudentReqDTO addStudentReqDTO) {
+        Students newStudent = modelMapper.map(addStudentReqDTO,Students.class);
+        Students students = studentRepository.save(newStudent);
+        return modelMapper.map(students,studentDto.class);
     }
 }
